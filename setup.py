@@ -3,6 +3,7 @@ from distutils.core import setup
 setup(
     name='Discord-Reddit Webhook',
     version='1.0',
+    requires=['requests'],
     url='https://twitter.com/rainbowroxxers',
     license='MIT',
     author='roxie',

@@ -1,8 +1,8 @@
-#!/usr/bin/python
-
 
 import sys
 import pip
+
+# TODO: Clean up code by moving functions to modules.
 
 try:
     import requests
@@ -22,6 +22,20 @@ import json
 from time import sleep
 from os.path import isfile
 from datetime import datetime
+
+def config(section):
+    import configparser
+    config = configparser.ConfigParser()
+    config.read('config.ini')
+    dict1 = {}
+    options = config.options(section)
+    for option in options:
+        try:
+            dict1[option] = config.get(section, option)
+        except:
+            print("exception on %s!" % option)
+            dict1[option] = None
+    return dict1
 
 def filewrite(data):
     with open("idcache.txt", "w") as f:
@@ -105,7 +119,7 @@ def makepost(data, footerimg):
             "description": description,
             "footer": {
                 "icon_url": footerimg,
-                "text": "/r/"+data["data"]["subreddit"]+" ǀ Created "+ ech
+                "text": "/r/"+data["data"]["subreddit"]+"  |  Created "+ ech
             }
         }]
     }
@@ -128,9 +142,12 @@ def post(data, url, img):
     sleep(2)
 
 if __name__ == "__main__":
-    subreddit = str(input("Subreddit: ")).lower()
-    url = str(input("Webhook URL: "))
-    img = str(input("Footer Image (Leave blank if you don't want/have one): "))
+    required = config("Required")
+    optional = config("Optional")
+    print(required)
+    subreddit = required["subreddit"]
+    url = required["url"]
+    img = optional["footerimg"]
     x = False
     while True:
         data = get(subreddit)
