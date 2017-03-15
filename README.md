@@ -1,5 +1,5 @@
 # Discorddit Webhook
-A script to post the newest submissions of a given subreddit to a discord webhook. This has been developed instead of using a service like zapier or ifttt because we kind of wanted
+A script to post the newest submissions of a given subreddit to a discord webhook. The script will check every five minutes for new posts. 
 
 [![MIT](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat-square)](https://opensource.org/licenses/MIT) [![Say Thanks](https://img.shields.io/badge/say-thanks-ff69b4.svg)](https://saythanks.io/to/RainbowDinoaur)
 
@@ -32,7 +32,9 @@ footerimg: https://i.imgur.com/coolfooterimage
 
 You will need to replace the url and subreddit fields with the ones needed for your discord server. You can get the url from the webhooks menu. The subreddit name is just the name of the subreddit. Colour is a decimal version of the hex code for the colour you want to use. A footer image is optional. If you don't have/need one, leave this section blank.
 
-The webhook has three types of posts. Self text posts where plain text is posted, a link posts where a preview in unavaliable so a URL is posted, and a link post where preview is avaliable so both the preview and the URL are posted.
+The webhook has three types of posts. Self text posts where plain text is posted, a link posts where a preview in unavaliable so a URL is posted, and a link post where preview is avaliable so both the preview and the URL are posted. 
+
+Be careful running the script for the first time or after periods of inactivity, it will post 25 messages at once to load up the ids.
 
 ![Preview](http://i.imgur.com/NcxWOCY.png)
 
