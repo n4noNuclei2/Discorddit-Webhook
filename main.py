@@ -1,23 +1,9 @@
-
-import sys
-import pip
+# Discorddit
+# Made by /u/xGiBbYv, Roxxers#7443, or @RainbwowRoxxers on Twitter ^-^
 
 # TODO: Clean up code by moving functions to modules.
 
-try:
-    import requests
-except ImportError as e:
-        print(e)
-        print("Attempting to install dependencies...")
-
-        err = pip.run_install('--upgrade -r requirements.txt')
-
-        if err:
-            print("\nYou may need to %s to install dependencies." %
-                  ['use sudo', 'run as admin'][sys.platform.startswith('win')])
-        else:
-            print("\nOk lets hope it worked\n")
-
+import requests
 import json
 from time import sleep
 from os.path import isfile
@@ -89,7 +75,7 @@ def truncate(text):
                 i -= 1
     return text
 
-def makepost(data, footerimg):
+def makepost(data, footerimg, colour):
     det = determine(data)
     if det == 0:
         description = truncate(data["data"]["selftext"])
@@ -106,7 +92,7 @@ def makepost(data, footerimg):
     ech = datetime.utcfromtimestamp(data["data"]["created_utc"]).strftime("%d/%m/%Y %H:%M:%S UTC")
     msg = {
         "embeds": [{
-            "color": "16744192",
+            "color": int(colour),
             "title": "/u/"+data["data"]["author"],
             "url": "https://www.reddit.com/u/" + data["data"]["author"],
             "author": {
@@ -129,8 +115,8 @@ def makepost(data, footerimg):
         msg["embeds"][0].pop("description")
     return msg
 
-def post(data, url, img):
-    msg = makepost(data, img)
+def post(data, url, img, colour):
+    msg = makepost(data, img, colour)
     headers = {'Content-Type': 'application/json'}
     r = requests.post(url, data=json.dumps(msg), headers=headers)
     if r.status_code == 400:
@@ -148,6 +134,7 @@ if __name__ == "__main__":
     subreddit = required["subreddit"]
     url = required["url"]
     img = optional["footerimg"]
+    colour = required["colour"]
     x = False
     while True:
         data = get(subreddit)
@@ -159,7 +146,7 @@ if __name__ == "__main__":
             for id in reversed(data):
                 i -= 1
                 if id["data"]["id"] not in f:
-                    post(data[i], url, img)
+                    post(data[i], url, img, colour)
                     x = True
         filewrite(data)
         if not x:
