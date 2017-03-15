@@ -1,7 +1,7 @@
 # Discorddit Webhook
 A script to post the newest submissions of a given subreddit to a discord webhook. The script will check every five minutes for new posts. 
 
-[![MIT](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat-square)](https://opensource.org/licenses/MIT) [![Say Thanks](https://img.shields.io/badge/say-thanks-ff69b4.svg)](https://saythanks.io/to/RainbowDinoaur)
+[![MIT](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat-square)](https://opensource.org/licenses/MIT) [![Say Thanks](https://img.shields.io/badge/say-thanks-ff69b4.svg?style=flat-square)](https://saythanks.io/to/RainbowDinoaur)
 
 ## Contents
 
