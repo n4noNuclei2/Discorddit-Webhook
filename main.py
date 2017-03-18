@@ -62,8 +62,8 @@ def get(sub):
 
 def truncate(text):
     if len(text) > 1650:
-        i = 1600
-        text = text[:i]
+        i = 1599
+        text = text[:i+1]
         while True:
             char = text[i]
             if char == " ":
