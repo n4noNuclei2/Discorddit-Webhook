@@ -2,6 +2,7 @@
 # Made by /u/xGiBbYv, Roxxers#7443, or @RainbwowRoxxers on Twitter ^-^
 
 # TODO: Clean up code by moving functions to modules.
+# TODO: Truncate() sometimes outputs just "..." so probably fix that.
 
 import requests
 import json
