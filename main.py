@@ -2,10 +2,10 @@
 # Made by /u/xGiBbYv, Roxxers#7443, or @RainbwowRoxxers on Twitter ^-^
 
 # TODO: Clean up code by moving functions to modules.
-# TODO: Truncate() sometimes outputs just "..." so probably fix that.
 
 import requests
 import json
+import textwrap
 from time import sleep
 from os.path import isfile
 from datetime import datetime
@@ -62,19 +62,8 @@ def get(sub):
             pass
 
 def truncate(text):
-    if len(text) > 1650:
-        i = 1599
-        text = text[:i+1]
-        while True:
-            char = text[i]
-            if char == " ":
-                if text[i-1] == ".":
-                    return text[i]+".."
-                else:
-                    return text[i]+"..."
-            else:
-                i -= 1
-    return text
+    from textwrap import shorten
+    return shorten(text, 1600)
 
 def makepost(data, footerimg, colour):
     det = determine(data)
@@ -123,7 +112,7 @@ def post(data, url, img, colour):
     if r.status_code == 400:
         print("Post Failed, Error 400")
     else:
-        print("Posted "+data["data"]["title"])
+        print("Posted {}".format(data["data"]["title"]).encode("utf-8"))
     print("Code "+str(r.status_code))
     print("")
     sleep(2)
